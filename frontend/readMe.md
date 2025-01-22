@@ -7,4 +7,3 @@ This project contains the frontend code for an e-commerce platform. The frontend
 - **Product Listings**: View, add, update, and remove product listings.
 - **Transactions**: Securely handle transactions between buyers and sellers.
 - **User Accounts**: Manage user accounts and authentication.
-
