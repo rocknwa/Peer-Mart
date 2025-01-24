@@ -13,9 +13,11 @@ contract ECommerce is Ownable(msg.sender) {
         string imageUrl;
         uint price;
         address payable seller;
+        string sellerName;
         bool isSold;
         bool isPaid;
-        address payable buyer;
+        address payable buyer; 
+        string description;
     }
 
     struct Seller {
@@ -27,6 +29,11 @@ contract ECommerce is Ownable(msg.sender) {
         uint256 rating;
     }
 
+    struct SellerContact {
+        string location;
+        string phoneNumber;
+    }
+
     struct BlockedSeller {
         address sellerAddress;
         string reason;
@@ -35,6 +42,7 @@ contract ECommerce is Ownable(msg.sender) {
     uint public productCount = 0;
     mapping(uint => Product) public products;
     mapping(address => Seller) public sellers;
+    mapping(address => SellerContact) public sellerContacts;
     mapping(address => BlockedSeller) public blockedSellers;
     mapping(address => bool) public isSellerBlocked;
     mapping(uint => mapping(address => bool)) public hasReported; // Mapping to track reports
@@ -52,6 +60,7 @@ contract ECommerce is Ownable(msg.sender) {
         string imageUrl,
         uint price,
         address payable seller,
+        string sellerName,
         bool isSold,
         bool isPaid
     );
@@ -94,17 +103,20 @@ contract ECommerce is Ownable(msg.sender) {
         usdtToken = IERC20(_usdtTokenAddress);
     }
 
-    function registerSeller(string memory _name, string memory _profileURI) public {
+    function registerSeller(string memory _name, string memory _profileURI, string memory _location, string memory _phoneNumber) public {
         require(bytes(_name).length > 0, "Seller name is required");
         require(bytes(_profileURI).length > 0, "Profile URI is required");
+        require(bytes(_location).length > 0, "Location is required");
+        require(bytes(_phoneNumber).length > 0, "Phone number is required");
         require(bytes(sellers[msg.sender].name).length == 0, "Seller already registered");
 
         sellers[msg.sender] = Seller(_name, _profileURI, 0, 0, 0, 0);
+        sellerContacts[msg.sender] = SellerContact(_location, _phoneNumber);
         
         emit SellerRegistered(msg.sender, _name, _profileURI);
     }
 
-    function createProduct(string memory _name, string memory _imageUrl, uint _price) public {
+    function createProduct(string memory _name, string memory _imageUrl, uint _price, string memory _description) public {
         require(bytes(_name).length > 0, "Product name is required");
         require(bytes(_imageUrl).length > 0, "Product image URL is required");
         require(_price > 0, "Product price must be greater than zero");
@@ -112,9 +124,9 @@ contract ECommerce is Ownable(msg.sender) {
         require(bytes(sellers[msg.sender].name).length > 0, "Seller not registered");
 
         productCount++;
-        products[productCount] = Product(productCount, _name, _imageUrl, _price, payable(msg.sender), false, false, payable(address(0)));
+        products[productCount] = Product(productCount, _name, _imageUrl, _price, payable(msg.sender), sellers[msg.sender].name, false, false, payable(address(0)), _description);
 
-        emit ProductCreated(productCount, _name, _imageUrl, _price, payable(msg.sender), false, false);
+        emit ProductCreated(productCount, _name, _imageUrl, _price, payable(msg.sender), sellers[msg.sender].name, false, false);
     }
 
     function purchaseProduct(uint _id) public {
@@ -220,11 +232,20 @@ contract ECommerce is Ownable(msg.sender) {
         emit SellerBlocked(_seller, _reason);
     }
 
+    function getSellerDetails(uint _id) public view returns (SellerContact memory) {
+        Product storage _product = products[_id];
+        require(_product.id > 0 && _product.id <= productCount, "Product does not exist");
+        require(_product.buyer == msg.sender, "Only the buyer can view seller details");
+        require(_product.isPaid, "Product must be paid for to view seller details");
+
+        return sellerContacts[_product.seller];
+    }
+
     function getProduct(uint _id) public view returns (Product memory) {
         return products[_id];
     }
 
-    function withdrawFees() public onlyOwner {
+    function withdrawFees() public onlyOwner{
         usdtToken.transfer(owner(), totalFeesCollected);
         totalFeesCollected = 0;
     }
