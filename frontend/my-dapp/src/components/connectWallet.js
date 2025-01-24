@@ -21,7 +21,7 @@ export function ConnectWallet({ children }) {
     }
   }, []);
 
-  const contractAddress = '0x356edA5558641C70E39fA4920B63d88Bcc12b1C2'; 
+  const contractAddress = '0x8262dfA64c7fd013241CBAB524f2319b271F29AE'; 
 
   const connectWallet = async () => {
     try {
