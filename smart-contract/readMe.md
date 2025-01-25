@@ -8,4 +8,4 @@ This project contains the smart contract code for an e-commerce platform. The sm
 - **Transactions**: Securely handle transactions between buyers and sellers.
 - **User Accounts**: Manage user accounts and authentication.
 
-  
+  ...
