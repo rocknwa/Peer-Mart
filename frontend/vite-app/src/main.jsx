@@ -10,6 +10,8 @@ import '@fontsource/roboto/700.css';
 import { BrowserRouter, Routes, Route } from 'react-router'
 import Footer from './components/ui/Footer.jsx'
 import Header from './components/ui/Header.jsx'
+import ProductDetails from './components/ui/ProductDetails.jsx'
+import Cart from './components/ui/Cart.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -18,14 +20,14 @@ createRoot(document.getElementById('root')).render(
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<App />} />
-          {/* <Route path="/cart" element={<Cart />} />
+          <Route path="/cart" element={<Cart />} />
           <Route path="products">
-            <Route index element={<AllProducts />} />
+            <Route index element={<App />} />
             <Route path=":id" element={<ProductDetails />} />
-            <Route path="popular" element={<Popular />} />
+            {/* <Route path="popular" element={<Popular />} /> */}
           </Route>
 
-          <Route path="seller">
+          {/* <Route path="seller">
             <Route index element={<AllProducts />} />
             <Route path=":id" element={<ProductDetails />} />
             <Route path="list" element={<ListProducts />} />

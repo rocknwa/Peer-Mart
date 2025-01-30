@@ -8,6 +8,8 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useWeb3 } from "../connectWallet";
 import { useEffect } from 'react';
+import { ShoppingCart } from '@mui/icons-material';
+import { Badge } from '@mui/material';
 
 export default function Header() {
   const { web3, contract, account, connectWallet, disconnectWallet, connected } = useWeb3();
@@ -58,15 +60,17 @@ export default function Header() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="fixed" color='inherit'>
         <Toolbar>
-          {/* <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton> */}
+          <Badge badgeContent={7}>
+            <IconButton
+                size="small"
+                edge="start"
+                aria-label="menu"
+                href='/cart'
+            >
+                <ShoppingCart color='primary' />
+            </IconButton>
+          </Badge>
+          
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Ahia Onchain
           </Typography>
@@ -74,7 +78,7 @@ export default function Header() {
           {connected ? (
             <Button onClick={handleDisconnect} variant="contained">Disconnect</Button>
           ) : (
-            <Button onClick={handleConnect} variant="contained">Connect</Button>
+            <Button onClick={handleConnect} variant="contained">Connect Wallet</Button>
           )}
 
         </Toolbar>

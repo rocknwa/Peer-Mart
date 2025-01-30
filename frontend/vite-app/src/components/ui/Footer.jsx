@@ -5,7 +5,7 @@ import FolderIcon from '@mui/icons-material/Folder';
 import RestoreIcon from '@mui/icons-material/Restore';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import { Home } from '@mui/icons-material';
+import { Home, ShoppingBag } from '@mui/icons-material';
 
 export default function Footer() {
   const [value, setValue] = React.useState('recents');
@@ -20,7 +20,7 @@ export default function Footer() {
         href='/'
         label="Shop"
         value="shop"
-        icon={<Home />}
+        icon={<ShoppingBag />}
       />
       <BottomNavigationAction
         label="Favorites"
