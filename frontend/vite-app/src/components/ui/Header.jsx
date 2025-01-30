@@ -15,11 +15,11 @@ export default function Header() {
   const { web3, contract, account, connectWallet, disconnectWallet, connected } = useWeb3();
 
 
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setLoading(false);
+  //   }, 2000);
+  // }, []);
 
   useEffect(() => {
     if (connected) {

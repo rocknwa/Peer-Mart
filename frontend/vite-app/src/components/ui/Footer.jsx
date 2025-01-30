@@ -1,7 +1,7 @@
 import * as React from 'react';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import { Add, AttachMoneyRounded, BusinessCenter, Person, ShoppingBag, ShoppingBasketTwoTone } from '@mui/icons-material';
+import { Add, AttachMoneyRounded, BusinessCenter, ListAltRounded, Person, ShoppingBag, ShoppingBasketTwoTone } from '@mui/icons-material';
 
 export default function Footer() {
   const [value, setValue] = React.useState('recents');
@@ -40,6 +40,12 @@ export default function Footer() {
         label="Add Product"
         value="Add Product"
         icon={<Add />}
+      />
+      <BottomNavigationAction
+        href='/seller/list'
+        label="Listed Products"
+        value="Listed Products"
+        icon={<ListAltRounded />}
       />
       <BottomNavigationAction
         href='/seller/new'

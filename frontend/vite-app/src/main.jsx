@@ -17,6 +17,7 @@ import AddProduct from './components/ui/Seller/AddProduct.jsx'
 import NewOrders from './components/ui/Seller/NewOrders.jsx'
 import UserOrders from './components/ui/UserOrders.jsx'
 import UserProfile from './components/ui/UserProfile.jsx'
+import ViewListedProducts from './components/ui/Seller/ViewListedProducts.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -36,7 +37,7 @@ createRoot(document.getElementById('root')).render(
 
           <Route path="seller">
             <Route index element={<AllOrders />} />
-            {/* <Route path=":id" element={<ProductDetails />} /> */}
+            <Route path="list" element={<ViewListedProducts />} />
             <Route path="add" element={<AddProduct />} />
             <Route path="new" element={<NewOrders />} />
           </Route>

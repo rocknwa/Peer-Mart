@@ -35,6 +35,7 @@ export default function CountrySelect() {
         <TextField
           {...params}
           label="Choose a country"
+          helperText="Nigeria"
           slotProps={{
             htmlInput: {
               ...params.inputProps,
