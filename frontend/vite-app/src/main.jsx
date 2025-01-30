@@ -12,6 +12,9 @@ import Footer from './components/ui/Footer.jsx'
 import Header from './components/ui/Header.jsx'
 import ProductDetails from './components/ui/ProductDetails.jsx'
 import Cart from './components/ui/Cart.jsx'
+import AllOrders from './components/ui/Seller/AllOrders.jsx'
+import AddProduct from './components/ui/Seller/AddProduct.jsx'
+import NewOrders from './components/ui/Seller/NewOrders.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -21,17 +24,19 @@ createRoot(document.getElementById('root')).render(
         <Routes>
           <Route path="/" element={<App />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/orders" element={<Cart />} />
           <Route path="products">
             <Route index element={<App />} />
             <Route path=":id" element={<ProductDetails />} />
             {/* <Route path="popular" element={<Popular />} /> */}
           </Route>
 
-          {/* <Route path="seller">
-            <Route index element={<AllProducts />} />
-            <Route path=":id" element={<ProductDetails />} />
-            <Route path="list" element={<ListProducts />} />
-          </Route> */}
+          <Route path="seller">
+            <Route index element={<AllOrders />} />
+            {/* <Route path=":id" element={<ProductDetails />} /> */}
+            <Route path="add" element={<AddProduct />} />
+            <Route path="new" element={<NewOrders />} />
+          </Route>
         </Routes>
       </BrowserRouter>
       <Footer/>

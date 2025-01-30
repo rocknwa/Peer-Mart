@@ -5,7 +5,7 @@ import FolderIcon from '@mui/icons-material/Folder';
 import RestoreIcon from '@mui/icons-material/Restore';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import { Home, ShoppingBag } from '@mui/icons-material';
+import { Add, AttachMoneyRounded, BusinessCenter, Home, Money, MoneyOff, MoneyOutlined, Person, ShoppingBag, ShoppingBasketTwoTone } from '@mui/icons-material';
 
 export default function Footer() {
   const [value, setValue] = React.useState('recents');
@@ -23,16 +23,30 @@ export default function Footer() {
         icon={<ShoppingBag />}
       />
       <BottomNavigationAction
-        label="Favorites"
-        value="favorites"
-        icon={<FavoriteIcon />}
+        href='/orders'
+        label="User Orders"
+        value="User Orders"
+        icon={<ShoppingBasketTwoTone />}
       />
       <BottomNavigationAction
-        label="Nearby"
-        value="nearby"
-        icon={<LocationOnIcon />}
+        href='/orders'
+        label="User Profile"
+        value="User Profile"
+        icon={<Person />}
       />
-      <BottomNavigationAction label="Folder" value="folder" icon={<FolderIcon />} />
+      <BottomNavigationAction
+        href='/seller/add'
+        label="Add Product"
+        value="Add Product"
+        icon={<Add />}
+      />
+      <BottomNavigationAction
+        href='/seller/new'
+        label="New Orders"
+        value="New Orders"
+        icon={<AttachMoneyRounded />}
+      />
+      <BottomNavigationAction href='/seller' label="Seller" value="Listed" icon={<BusinessCenter />} />
     </BottomNavigation>
   );
 }
