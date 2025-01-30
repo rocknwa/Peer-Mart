@@ -1,11 +1,7 @@
 import * as React from 'react';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import FolderIcon from '@mui/icons-material/Folder';
-import RestoreIcon from '@mui/icons-material/Restore';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import { Add, AttachMoneyRounded, BusinessCenter, Home, Money, MoneyOff, MoneyOutlined, Person, ShoppingBag, ShoppingBasketTwoTone } from '@mui/icons-material';
+import { Add, AttachMoneyRounded, BusinessCenter, Person, ShoppingBag, ShoppingBasketTwoTone } from '@mui/icons-material';
 
 export default function Footer() {
   const [value, setValue] = React.useState('recents');
@@ -16,6 +12,7 @@ export default function Footer() {
 
   return (
     <BottomNavigation sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} value={value} onChange={handleChange}>
+        {/* User Menu */}
       <BottomNavigationAction
         href='/'
         label="Shop"
@@ -28,12 +25,16 @@ export default function Footer() {
         value="User Orders"
         icon={<ShoppingBasketTwoTone />}
       />
+
+      {/* Shared */}
       <BottomNavigationAction
-        href='/orders'
+        href='/profile'
         label="User Profile"
         value="User Profile"
         icon={<Person />}
       />
+
+      {/* Seller Menu */}
       <BottomNavigationAction
         href='/seller/add'
         label="Add Product"
@@ -46,7 +47,13 @@ export default function Footer() {
         value="New Orders"
         icon={<AttachMoneyRounded />}
       />
-      <BottomNavigationAction href='/seller' label="Seller" value="Listed" icon={<BusinessCenter />} />
+      <BottomNavigationAction 
+        href='/seller' 
+        label="Seller" 
+        value="Listed" 
+        icon={<BusinessCenter />} 
+      />
+      
     </BottomNavigation>
   );
 }

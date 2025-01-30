@@ -15,6 +15,8 @@ import Cart from './components/ui/Cart.jsx'
 import AllOrders from './components/ui/Seller/AllOrders.jsx'
 import AddProduct from './components/ui/Seller/AddProduct.jsx'
 import NewOrders from './components/ui/Seller/NewOrders.jsx'
+import UserOrders from './components/ui/UserOrders.jsx'
+import UserProfile from './components/ui/UserProfile.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -24,7 +26,8 @@ createRoot(document.getElementById('root')).render(
         <Routes>
           <Route path="/" element={<App />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/orders" element={<Cart />} />
+          <Route path="/orders" element={<UserOrders />} />
+          <Route path="/profile" element={<UserProfile />} />
           <Route path="products">
             <Route index element={<App />} />
             <Route path=":id" element={<ProductDetails />} />
