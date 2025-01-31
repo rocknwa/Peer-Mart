@@ -21,6 +21,8 @@ import Switch from '@mui/material/Switch';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
+import Header from './Header';
+import Footer from './Footer';
 
 function createData(id, name, amount, status, reciever, address) {
   return {
@@ -277,7 +279,9 @@ export default function UserOrders() {
   );
 
   return (
-    <Box sx={{ width: '100%' }}>
+    <>
+      <Header />
+      <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
         <EnhancedTableToolbar numSelected={selected.length} />
         <TableContainer>
@@ -292,8 +296,7 @@ export default function UserOrders() {
               orderBy={orderBy}
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
-              rowCount={rows.length}
-            />
+              rowCount={rows.length} />
             <TableBody>
               {visibleRows.map((row, index) => {
                 const isItemSelected = selected.includes(row.id);
@@ -316,8 +319,7 @@ export default function UserOrders() {
                         checked={isItemSelected}
                         inputProps={{
                           'aria-labelledby': labelId,
-                        }}
-                      />
+                        }} />
                     </TableCell>
                     <TableCell
                       component="th"
@@ -353,13 +355,14 @@ export default function UserOrders() {
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
+          onRowsPerPageChange={handleChangeRowsPerPage} />
       </Paper>
       {/* <FormControlLabel
-        control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense padding"
-      /> */}
-    </Box>
+      control={<Switch checked={dense} onChange={handleChangeDense} />}
+      label="Dense padding"
+    /> */}
+      </Box>
+      <Footer />
+    </>
   );
 }

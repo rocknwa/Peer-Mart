@@ -7,6 +7,8 @@ import Button from '@mui/material/Button';
 import CardActionArea from '@mui/material/CardActionArea';
 import CardActions from '@mui/material/CardActions';
 import { useParams } from 'react-router';
+import Header from './Header';
+import Footer from './Footer';
 
 export default function ProductDetails() {
   let params = useParams()
@@ -14,32 +16,37 @@ export default function ProductDetails() {
   
   const item = itemData.find((item)=> item.id == id)
   return (
-    <Card sx={{ marginBottom: 15, marginTop:15 }}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          // height="140"
-          image={item.img}
-          alt={item.title}
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            {item.title}
-            <Typography gutterBottom variant="h5" component="b" ml={2}>
-             ${item.price.toLocaleString()}
-          </Typography>
-          </Typography>
-          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            {item.description}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <Button variant='contained' size="large" color="primary">
-          Add to Cart
-        </Button>
-      </CardActions>
-    </Card>
+    <>
+      <Header/>
+      <Card sx={{ marginBottom: 15, marginTop:15 }}>
+        <CardActionArea>
+          <CardMedia
+            component="img"
+            // height="140"
+            image={item.img}
+            alt={item.title}
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              {item.title}
+              <Typography gutterBottom variant="h5" component="b" ml={2}>
+              ${item.price.toLocaleString()}
+            </Typography>
+            </Typography>
+            <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+              {item.description}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+        <CardActions>
+          <Button variant='contained' size="large" color="primary">
+            Add to Cart
+          </Button>
+        </CardActions>
+      </Card>
+      <Footer/>
+    </>
+    
   );
 }
 

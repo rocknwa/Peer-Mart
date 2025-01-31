@@ -7,6 +7,8 @@ import { Box, Container, Stack } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import ProductsList from './components/ui/ProductsList';
+import Header from './components/ui/Header';
+import Footer from './components/ui/Footer';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: '#fff',
@@ -23,14 +25,15 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
   const [sellers, setSellers] = useState({});
-  
+   
 
   return (
     <>
+      <Header/>
       <Container maxWidth="xl">
         <ProductsList />
       </Container>
-
+      <Footer/>
     </>
   )
 }

@@ -4,78 +4,78 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
+import Header from './Header';
+import Footer from './Footer';
 
 export default function UserProfile
 () {
   let [country, setCountry] = React.useState()
   return (
-    <React.Fragment>
-      <CssBaseline />
-      <Container maxWidth="sm">
-      <Box sx={{ display: 'flex', alignItems: 'center', '& > :not(style)': { m: 1 } }}>
-        <TextField
-          helperText="John Doe"
-          id="demo-helper-text-aligned"
-          label="Name"
-        />
-        <Autocomplete
-      id="country-select-demo"
-      sx={{ width: 300 }}
-      options={countries}
-      autoHighlight
-      getOptionLabel={(option) => option.label}
-      renderOption={(props, option) => {
-        const { key, ...optionProps } = props;
-        return (
-          <Box
-            key={key}
-            component="li"
-            sx={{ '& > img': { mr: 2, flexShrink: 0 } }}
-            {...optionProps}
-          >
-            <img
-              loading="lazy"
-              width="20"
-              srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
-              src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
-              alt=""
-            />
-            {option.label} ({option.code}) +{option.phone}
-          </Box>
-        );
-      }}
-      renderInput={(params) => (
-        <TextField
-          id='countryy'
-          {...params}
-          label="Choose a country"
-          value={country}
-          onChange={(e)=> setCountry(e.target.value)}
-          helperText="Nigeria"
-          slotProps={{
-            htmlInput: {
-              ...params.inputProps,
-              autoComplete: 'new-password', // disable autocomplete and autofill
-            },
-          }}
-        />
-      )}
-    />
-      </Box>
-      <Box sx={{ display: 'flex', alignItems: 'center', '& > :not(style)': { m: 1 } }}>
-        <TextField
-          helperText="Any"
-          id="demo-helper-text-aligned"
-          label="Any"
-        />
-        <TextField
-          helperText="1, Example Street, Example State, Example Country"
-          id="demo-helper-text-aligned-no-helper"
-          label="Address"
-        />
-      </Box>
-      </Container>
-    </React.Fragment>
+    <>
+      <Header />
+        <React.Fragment>
+          <CssBaseline />
+          <Container maxWidth="sm">
+            <Box sx={{ display: 'flex', alignItems: 'center', '& > :not(style)': { m: 1 } }}>
+              <TextField
+                helperText="John Doe"
+                id="demo-helper-text-aligned"
+                label="Name" />
+              <Autocomplete
+                id="country-select-demo"
+                sx={{ width: 300 }}
+                options={countries}
+                autoHighlight
+                getOptionLabel={(option) => option.label}
+                renderOption={(props, option) => {
+                  const { key, ...optionProps } = props;
+                  return (
+                    <Box
+                      key={key}
+                      component="li"
+                      sx={{ '& > img': { mr: 2, flexShrink: 0 } }}
+                      {...optionProps}
+                    >
+                      <img
+                        loading="lazy"
+                        width="20"
+                        srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
+                        src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
+                        alt="" />
+                      {option.label} ({option.code}) +{option.phone}
+                    </Box>
+                  );
+                } }
+                renderInput={(params) => (
+                  <TextField
+                    id='countryy'
+                    {...params}
+                    label="Choose a country"
+                    value={country}
+                    onChange={(e) => setCountry(e.target.value)}
+                    helperText="Nigeria"
+                    slotProps={{
+                      htmlInput: {
+                        ...params.inputProps,
+                        autoComplete: 'new-password', // disable autocomplete and autofill
+                      },
+                    }} />
+                )} />
+            </Box>
+            <Box sx={{ display: 'flex', alignItems: 'center', '& > :not(style)': { m: 1 } }}>
+              <TextField
+                helperText="Any"
+                id="demo-helper-text-aligned"
+                label="Any" />
+              <TextField
+                helperText="1, Example Street, Example State, Example Country"
+                id="demo-helper-text-aligned-no-helper"
+                label="Address" />
+            </Box>
+          </Container>
+        </React.Fragment>
+      <Footer />
+    </>
   );
 }
 

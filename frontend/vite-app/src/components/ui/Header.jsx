@@ -11,6 +11,7 @@ import { useEffect } from 'react';
 import { ShoppingCart } from '@mui/icons-material';
 import { Badge } from '@mui/material';
 
+
 export default function Header() {
   const { web3, contract, account, connectWallet, disconnectWallet, connected } = useWeb3();
 

@@ -8,7 +8,7 @@ export default function ProductsList() {
   return (
     <ImageList cols={2} gap={30} style={{marginTop: 60, marginBottom: 60}}>
       {itemData.map((item) => (
-        <Link to={`products/${item.id}`}>
+        <Link to={`${item.id}`}>
             <ImageListItem key={item.img}>
                 <img
                     srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}

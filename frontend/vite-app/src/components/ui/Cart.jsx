@@ -16,6 +16,9 @@ import Typography from '@mui/material/Typography';
 import FolderIcon from '@mui/icons-material/Folder';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Button } from '@mui/material';
+import Header from './Header';
+import Footer from './Footer';
+
 
 function generate(element) {
   return [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map((value) =>
@@ -34,52 +37,57 @@ export default function Cart() {
   let prices = 0;
 
   return (
-    <Box sx={{ flexGrow: 1, width: '500px' }}>
-      <Grid container spacing={2}>
-        <Grid item xs={12} md={12} style={{paddingBottom: 30, paddingTop: 30}}>
-          {/* <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
-            Avatar with text and icon
-          </Typography> */}
-          <Demo style={{paddingBottom: 30, paddingTop: 30}}>
-            <List dense={false}>
-                {itemData.map((item)=> {
-                    prices+= item.price
-                    return (
-                        <ListItem
-                            secondaryAction={<IconButton onClick={() => { alert('Clicked'); } } edge="end" aria-label="delete">
-                                <DeleteIcon />
-                            </IconButton>}
-                        >
-                            <ListItemAvatar>
-                                <Avatar>
-                                    <img src={item.img} style={{ width: '100%' }} alt="" />
-                                </Avatar>
-                            </ListItemAvatar>
-                            <ListItemText
-                                //   primary="Single-line item"
-                                secondary={item.title} />
+    <>
+      <Header/><br /><br />
+      <Box sx={{ flexGrow: 1, width: '500px' }}>
+        <Grid container spacing={2}>
+          <Grid item xs={12} md={12} style={{paddingBottom: 30, paddingTop: 30}}>
+            {/* <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
+              Avatar with text and icon
+            </Typography> */}
+            <Demo style={{paddingBottom: 30, paddingTop: 30}}>
+              <List dense={false}>
+                  {itemData.map((item)=> {
+                      prices+= item.price
+                      return (
+                          <ListItem
+                              secondaryAction={<IconButton onClick={() => { alert('Clicked'); } } edge="end" aria-label="delete">
+                                  <DeleteIcon />
+                              </IconButton>}
+                          >
+                              <ListItemAvatar>
+                                  <Avatar>
+                                      <img src={item.img} style={{ width: '100%' }} alt="" />
+                                  </Avatar>
+                              </ListItemAvatar>
+                              <ListItemText
+                                  //   primary="Single-line item"
+                                  secondary={item.title} />
 
-                            <ListItemText
-                                //   primary="Single-line item"
-                                secondary={`$${item.price.toLocaleString()}`} />
+                              <ListItemText
+                                  //   primary="Single-line item"
+                                  secondary={`$${item.price.toLocaleString()}`} />
 
-                        </ListItem>
-                    );
-                })}
-              
-            </List>
+                          </ListItem>
+                      );
+                  })}
+                
+              </List>
 
-            <Typography variant="b" component="h2" display={'inherit'} color='info' mb={5}>
-                Total: ${prices.toLocaleString()}
-            </Typography>
+              <Typography variant="b" component="h2" display={'inherit'} color='info' mb={5}>
+                  Total: ${prices.toLocaleString()}
+              </Typography>
 
 
 
-            <Button onClick={()=> alert(prices)} variant="contained" color="error">Authorize Purcase</Button>
-          </Demo>
+              <Button onClick={()=> alert(prices)} variant="contained" color="error">Authorize Purcase</Button>
+            </Demo>
+          </Grid>
         </Grid>
-      </Grid>
-    </Box>
+      </Box>
+      <Footer/>
+    </>
+    
   );
 }
 

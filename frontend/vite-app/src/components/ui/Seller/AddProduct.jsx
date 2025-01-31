@@ -1,7 +1,13 @@
 import React from 'react'
+import Header from '../Header'
+import Footer from '../Footer'
 
 export default function AddProduct() {
   return (
-    <div>AddProduct</div>
+    <>
+      <Header/>
+      <div>AddProduct</div>
+      <Footer/>
+    </>
   )
 }

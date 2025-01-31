@@ -14,7 +14,7 @@ export default function Footer() {
     <BottomNavigation sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} value={value} onChange={handleChange}>
         {/* User Menu */}
       <BottomNavigationAction
-        href='/'
+        href='/products'
         label="Shop"
         value="shop"
         icon={<ShoppingBag />}
