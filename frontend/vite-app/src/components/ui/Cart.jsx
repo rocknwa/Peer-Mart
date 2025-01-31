@@ -4,16 +4,11 @@ import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import FolderIcon from '@mui/icons-material/Folder';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Button } from '@mui/material';
 import Header from './Header';
@@ -39,7 +34,7 @@ export default function Cart() {
   return (
     <>
       <Header/><br /><br />
-      <Box sx={{ flexGrow: 1, width: '500px' }}>
+      <Box style={{margin: 'auto'}} sx={{ flexGrow: 1, width: '500px' }}>
         <Grid container spacing={2}>
           <Grid item xs={12} md={12} style={{paddingBottom: 30, paddingTop: 30}}>
             {/* <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">

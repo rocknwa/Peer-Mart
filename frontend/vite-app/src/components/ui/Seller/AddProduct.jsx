@@ -5,7 +5,7 @@ import Footer from '../Footer'
 export default function AddProduct() {
   return (
     <>
-      <Header/>
+      <Header/><br /><br />
       <div>AddProduct</div>
       <Footer/>
     </>

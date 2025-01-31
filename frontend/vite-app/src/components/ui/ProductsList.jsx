@@ -3,6 +3,7 @@ import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import { Link } from 'react-router';
+// import '../../index.css'
 
 export default function ProductsList() {
   return (
@@ -16,9 +17,9 @@ export default function ProductsList() {
                     alt={item.title}
                     loading="lazy"
                 />
-                <ImageListItemBar
+                <ImageListItemBar style={{color: '#000'}}
                     title={item.title}
-                    subtitle={<span style={{color: '#eee'}}>${item.price}</span>}
+                    subtitle={<span style={{color: '#000'}}>${item.price}</span>}
                     position="below"
                 />
             </ImageListItem>
