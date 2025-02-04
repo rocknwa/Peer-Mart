@@ -1,8 +1,8 @@
 import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import ReactDOM from 'react-dom/client'
 // import './index.css'
 import App from './App.jsx'
-import { ConnectWallet } from './components/connectWallet'
+import { ConnectWallet } from './components/connectWallet.jsx'
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
@@ -18,8 +18,11 @@ import UserOrders from './components/ui/UserOrders.jsx'
 import UserProfile from './components/ui/UserProfile.jsx'
 import ViewListedProducts from './components/ui/Seller/ViewListedProducts.jsx'
 import { HomePage } from './components/Home/HomePage.jsx';
+import MetaMask from './MetaMask.tsx';
 
-createRoot(document.getElementById('root')).render(
+const root = document.getElementById("root")
+
+ReactDOM.createRoot(root).render(
   <StrictMode>
     <ConnectWallet>
       
