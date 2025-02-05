@@ -1,6 +1,7 @@
 import React, { useEffect, useState, createContext, useContext } from 'react';
 import Web3 from 'web3'
 import ECommerce from '../ECommerce.json';
+import { useConnectedStore } from '../store/connectedStore';
 
 // Create a context for Web3
 const Web3Context = createContext();
@@ -11,8 +12,11 @@ export const useWeb3 = () => useContext(Web3Context);
 export function ConnectWallet({ children }) {
   const [web3, setWeb3] = useState(null);
   const [account, setAccount] = useState(null);
-  const [connected, setConnected] = useState(false);
+  // const [connected, setConnected] = useState(false);
   const [contract, setContract] = useState(null);
+
+  const setConnected = useConnectedStore((state) => state.setConnected)
+  const setDisconnected = useConnectedStore((state) => state.setDisconnected)
 
   useEffect(() => {
     if (window.ethereum) {
@@ -39,7 +43,7 @@ export function ConnectWallet({ children }) {
       setContract(instance);
       console.log(account);
       setAccount(account);
-      setConnected(true);
+      setConnected()
     } catch (error) {
       console.error("Error connecting wallet:", error);
     }
@@ -47,14 +51,14 @@ export function ConnectWallet({ children }) {
 
   const disconnectWallet = () => {
     setAccount(null);
-    setConnected(false);
+    setDisconnected()
     setContract(null);
   };
 
   
 
   return (
-    <Web3Context.Provider value={{ web3, account, disconnectWallet, connectWallet, connected, contract }}>
+    <Web3Context.Provider value={{ web3, account, disconnectWallet, connectWallet, contract }}>
       <div>
         {children}
       </div>

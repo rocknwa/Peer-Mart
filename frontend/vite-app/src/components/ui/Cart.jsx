@@ -13,23 +13,57 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { Button } from '@mui/material';
 import Header from './Header';
 import Footer from './Footer';
+import { useCart } from '../../store/cartStore';
+import { useMutation } from "@tanstack/react-query";
 
-
-function generate(element) {
-  return [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map((value) =>
-    React.cloneElement(element, {
-      key: value,
-    }),
-  );
-}
+// function generate(element) {
+//   return [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map((value) =>
+//     React.cloneElement(element, {
+//       key: value,
+//     }),
+//   );
+// }
 
 const Demo = styled('div')(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
 }));
 
 export default function Cart() {
-
+  const items = useCart((state) => state.items)
+  const resetCart = useCart((state) => state.resetCart)
   let prices = 0;
+
+  function createOrder() {
+    // Order Logic
+
+    alert("Order Successful")
+    resetCart()
+  }
+
+  // const createOrderMutation = useMutation({
+  //   mutationFn: () => createOrder(items.map((item) => ({
+  //     productId: item.product.id, 
+  //     quantity: item.quantity,
+  //     price: item.product.price
+  //   }))),
+  //   onSuccess: (data) => {
+  //     console.log("Order Created", data)
+  //     resetCart()
+  //   },
+  //   onError: (error) => {
+  //     console.log("Order Failed", error)
+  //   }
+  // })
+
+  const onCheckout = async () => {
+    // Send Order to Blockchain
+    createOrder()
+    // createOrderMutation.mutate()
+  }
+
+  if (items.length === 0) {
+    window.location.href = "/products"
+  }
 
   return (
     <>
@@ -42,8 +76,8 @@ export default function Cart() {
             </Typography> */}
             <Demo style={{paddingBottom: 30, paddingTop: 30}}>
               <List dense={false}>
-                  {itemData.map((item)=> {
-                      prices+= item.price
+                  {items.map((item)=> {
+                      prices+= item.product.price
                       return (
                           <ListItem
                               secondaryAction={<IconButton onClick={() => { alert('Clicked'); } } edge="end" aria-label="delete">
@@ -52,16 +86,16 @@ export default function Cart() {
                           >
                               <ListItemAvatar>
                                   <Avatar>
-                                      <img src={item.img} style={{ width: '100%' }} alt="" />
+                                      <img src={item.product.img} style={{ width: '100%' }} alt="" />
                                   </Avatar>
                               </ListItemAvatar>
                               <ListItemText
-                                  //   primary="Single-line item"
-                                  secondary={item.title} />
+                                  //   primary="Single-line item.product"
+                                  secondary={item.product.title} />
 
                               <ListItemText
-                                  //   primary="Single-line item"
-                                  secondary={`$${item.price.toLocaleString()}`} />
+                                  //   primary="Single-line item.product"
+                                  secondary={`$${item.product.price.toLocaleString()}`} />
 
                           </ListItem>
                       );
@@ -75,7 +109,7 @@ export default function Cart() {
 
 
 
-              <Button onClick={()=> alert(prices)} variant="contained" color="error">Authorize Purcase</Button>
+              <Button onClick={onCheckout} variant="contained" color="error">Authorize Purcase</Button>
             </Demo>
           </Grid>
         </Grid>
@@ -86,78 +120,4 @@ export default function Cart() {
   );
 }
 
-const itemData = [
-    {
-      img: 'https://images.unsplash.com/photo-1551963831-b3b1ca40c98e',
-      title: 'Breakfast',
-      price: 500,
-      id: 1,
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d',
-      title: 'Burger',
-      price: 955,
-      id: 2,
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1522770179533-24471fcdba45',
-      title: 'Camera',
-      price: 677,
-      id: 3,
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c',
-      title: 'Coffee',
-      price: 400,
-      id: 4,
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1533827432537-70133748f5c8',
-      title: 'Hats',
-      price: 900,
-      id: 5,
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62',
-      title: 'Honey',
-      price: 200,
-      id: 6,
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1516802273409-68526ee1bdd6',
-      title: 'Basketball',
-      price: 400,
-      id: 7,
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1518756131217-31eb79b20e8f',
-      title: 'Fern',
-      price: 300,
-      id: 8,
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1597645587822-e99fa5d45d25',
-      title: 'Mushrooms',
-      price: 2300,
-      id: 9,
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1567306301408-9b74779a11af',
-      title: 'Tomato basil',
-      price: 780,
-      id: 10,
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1471357674240-e1a485acb3e1',
-      title: 'Sea star',
-      price: 2980,
-      id: 11,
-    },
-    {
-      img: 'https://images.unsplash.com/photo-1589118949245-7d38baf380d6',
-      title: 'Bike',
-      price: 1940,
-      id: 12,
-    },
-  ];
   

@@ -1,8 +1,12 @@
 import React from "react";
-
+import { useWeb3 } from "../connectWallet";
 import "./style.css";
+import { useConnectedStore } from "../../store/connectedStore";
  
 export const HomePage = () => {
+	const { web3, contract, account, connectWallet, disconnectWallet } = useWeb3();
+	const connected = useConnectedStore((state)=> state.connected)
+
   return (
     <div id="webcrumbs"> 
         <div className="w-full bg-white mx-auto px-4 md:px-0">
@@ -10,9 +14,16 @@ export const HomePage = () => {
     	    <div className="flex items-center">
     	      <h1 className="text-xl md:text-2xl font-bold">Ahia Onchain</h1>
     	    </div>
-    	    <button className="bg-gradient-to-r from-primary-600 to-primary-700 text-white px-6 py-2 rounded-full hover:shadow-lg transform hover:scale-105 transition-all">
-    	      Connect Wallet
-    	    </button>
+			{connected? (
+				<button onClick={()=> disconnectWallet()} className="bg-gradient-to-r from-primary-600 to-primary-700 text-white px-6 py-2 rounded-full hover:shadow-lg transform hover:scale-105 transition-all">
+				Disconnect Wallet
+				</button>
+			) : (
+				<button onClick={()=> connectWallet()} className="bg-gradient-to-r from-primary-600 to-primary-700 text-white px-6 py-2 rounded-full hover:shadow-lg transform hover:scale-105 transition-all">
+				Connect Wallet
+				</button>
+			)}
+    	    
     	  </nav>
     	
     	  <header className="py-12 md:py-20 text-center px-4">

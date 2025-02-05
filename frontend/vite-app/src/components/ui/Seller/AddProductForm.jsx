@@ -89,6 +89,7 @@ export default function AddProductForm() {
             {uploadStatus === 'uploading' && <LinearProgress />}
             {uploadStatus === 'uploaded' && <Typography>Uploaded</Typography>}
             {uploadStatus === 'uploaded' && <Link to={url} target='_blank' >{url}</Link>}
+            <br />
             {uploadStatus === 'failed' && <Typography color="error">Upload Failed. Try Again or select a different image</Typography>}
             <br />
             {uploadStatus === 'uploaded' && (

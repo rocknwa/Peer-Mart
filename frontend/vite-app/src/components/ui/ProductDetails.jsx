@@ -9,12 +9,29 @@ import CardActions from '@mui/material/CardActions';
 import { useParams } from 'react-router';
 import Header from './Header';
 import Footer from './Footer';
+import { useCart } from '../../store/cartStore';
 
 export default function ProductDetails() {
   let params = useParams()
   const id = params.id
-  
+
   const item = itemData.find((item)=> item.id == id)
+  
+  const addProduct = useCart((state) => state.addProduct)
+  const cartItems = useCart((state) => state.items)
+
+  const cartItem = {
+    id: item.id,
+    title: item.title,
+    price: item.price,
+    img: item.img,
+    quantity: 1,
+  }
+
+  const addToCart = () => {
+    addProduct(cartItem)
+  }
+
   return (
     <>
       <Header/>
@@ -39,7 +56,7 @@ export default function ProductDetails() {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button variant='contained' size="large" color="primary">
+          <Button onClick={addToCart} variant='contained' size="large" color="primary">
             Add to Cart
           </Button>
         </CardActions>
