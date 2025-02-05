@@ -29,10 +29,11 @@ export const HomePage = () => {
     	  <header className="py-12 md:py-20 text-center px-4">
     	    <h1 className="text-3xl md:text-5xl font-bold mb-6">Revolutionizing E-commerce with Web3</h1>
     	    <p className="text-lg md:text-xl mb-8 md:mb-10 max-w-2xl mx-auto">Experience the future of online shopping with blockchain technology, secure transactions, and decentralized commerce.</p>
-    	    {/* <button className="w-full md:w-auto bg-gradient-to-r from-primary-600 to-primary-700 text-white px-6 md:px-8 py-3 rounded-full text-lg font-semibold hover:shadow-xl transform hover:scale-105 transition-all">
-    	      Start Shopping Now
-    	    </button> */}
+    	    {connected? (
 			<a className="w-full md:w-auto bg-gradient-to-r from-primary-600 to-primary-700 text-white px-6 md:px-8 py-3 rounded-full text-lg font-semibold hover:shadow-xl transform hover:scale-105 transition-all" href="/products">Start Shopping Now</a>
+			) : (
+				<h1 className="text-3xl md:text-5xl font-bold mb-6">Connect Wallet to Start Shopping</h1>
+			)}
     	  </header>
     	
     	  <section className="py-12 md:py-16 bg-neutral-50">
