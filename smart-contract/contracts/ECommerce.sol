@@ -1,12 +1,9 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.28;
 
-import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract ECommerce is Ownable(msg.sender) {
-    IERC20 public usdtToken;
-
     struct Product {
         uint id;
         string name;
@@ -99,9 +96,6 @@ contract ECommerce is Ownable(msg.sender) {
         string reason
     );
 
-    constructor(address _usdtTokenAddress) {
-        usdtToken = IERC20(_usdtTokenAddress);
-    }
 
     function registerSeller(string memory _name, string memory _profileURI, string memory _location, string memory _phoneNumber) public {
         require(bytes(_name).length > 0, "Seller name is required");
@@ -129,20 +123,17 @@ contract ECommerce is Ownable(msg.sender) {
         emit ProductCreated(productCount, _name, _imageUrl, _price, payable(msg.sender), sellers[msg.sender].name, false, false);
     }
 
-    function purchaseProduct(uint _id) public {
+    function purchaseProduct(uint _id) public payable {
         Product storage _product = products[_id];
         address payable _seller = _product.seller;
 
         require(_product.id > 0 && _product.id <= productCount, "Product does not exist");
-        require(_product.price <= usdtToken.allowance(msg.sender, address(this)), "Not enough USDT allowance to purchase this product");
+        require(msg.value == _product.price, "Incorrect Ether value sent");
         require(!_product.isPaid, "Product is already paid for");
         require(_seller != msg.sender, "Seller cannot buy their own product");
 
         _product.isPaid = true;
         _product.buyer = payable(msg.sender);
-
-        // Transfer USDT to the contract
-        usdtToken.transferFrom(msg.sender, address(this), _product.price);
 
         emit ProductPurchased(_id, _product.name, _product.price, _seller, payable(msg.sender), true);
     }
@@ -158,8 +149,8 @@ contract ECommerce is Ownable(msg.sender) {
         totalFeesCollected += fee;
         _product.isSold = true;
 
-        // Transfer USDT to the seller
-        usdtToken.transfer(_product.seller, paymentToSeller);
+        // Transfer ETH to the seller
+        _product.seller.transfer(paymentToSeller);
 
         // Update seller's confirmed purchases
         sellers[_product.seller].confirmedPurchases += 1;
@@ -180,9 +171,9 @@ contract ECommerce is Ownable(msg.sender) {
         totalFeesCollected += fee;
         _product.isPaid = false;
 
-        // Transfer USDT back to the buyer and to the seller as penalty
-        usdtToken.transfer(_product.buyer, refundToBuyer);
-        usdtToken.transfer(_product.seller, paymentToSeller);
+        // Transfer ETH back to the buyer and to the seller as penalty
+        payable(_product.buyer).transfer(refundToBuyer);
+        _product.seller.transfer(paymentToSeller);
 
         // Update seller's canceled purchases
         sellers[_product.seller].canceledPurchases += 1;
@@ -246,7 +237,7 @@ contract ECommerce is Ownable(msg.sender) {
     }
 
     function withdrawFees() public onlyOwner{
-        usdtToken.transfer(owner(), totalFeesCollected);
+        payable(owner()).transfer(totalFeesCollected);
         totalFeesCollected = 0;
     }
 }
