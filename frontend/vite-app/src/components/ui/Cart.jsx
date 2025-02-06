@@ -14,7 +14,6 @@ import { Button } from '@mui/material';
 import Header from './Header';
 import Footer from './Footer';
 import { useCart } from '../../store/cartStore';
-import { useMutation } from "@tanstack/react-query";
 
 // function generate(element) {
 //   return [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map((value) =>
@@ -31,6 +30,7 @@ const Demo = styled('div')(({ theme }) => ({
 export default function Cart() {
   const items = useCart((state) => state.items)
   const resetCart = useCart((state) => state.resetCart)
+  const removeProduct = useCart((state) => state.removeProduct)
   let prices = 0;
 
   function createOrder() {
@@ -39,21 +39,6 @@ export default function Cart() {
     alert("Order Successful")
     resetCart()
   }
-
-  // const createOrderMutation = useMutation({
-  //   mutationFn: () => createOrder(items.map((item) => ({
-  //     productId: item.product.id, 
-  //     quantity: item.quantity,
-  //     price: item.product.price
-  //   }))),
-  //   onSuccess: (data) => {
-  //     console.log("Order Created", data)
-  //     resetCart()
-  //   },
-  //   onError: (error) => {
-  //     console.log("Order Failed", error)
-  //   }
-  // })
 
   const onCheckout = async () => {
     // Send Order to Blockchain
@@ -80,7 +65,8 @@ export default function Cart() {
                       prices+= item.product.price
                       return (
                           <ListItem
-                              secondaryAction={<IconButton onClick={() => { alert('Clicked'); } } edge="end" aria-label="delete">
+                          key={item.product.id}
+                              secondaryAction={<IconButton onClick={() => removeProduct(item.product) } edge="end" aria-label="delete">
                                   <DeleteIcon />
                               </IconButton>}
                           >

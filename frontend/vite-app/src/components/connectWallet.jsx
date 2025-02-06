@@ -50,6 +50,7 @@ export function ConnectWallet({ children }) {
   };
 
   const disconnectWallet = () => {
+    // web3.currentProvider?.disconnect()
     setAccount(null);
     setDisconnected()
     setContract(null);
